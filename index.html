@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="lights-on">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nguyen Huyen Linh — Business Analyst | Live at the Console</title>
+<meta name="description" content="Nguyen Huyen Linh — Business Analyst portfolio, staged as a live concert & vinyl record. Requirements, flows, and specs — played track by track.">
+<meta name="theme-color" content="#0A0918">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nguyen Huyen Linh — Business Analyst | Live at the Console">
+<meta property="og:description" content="A concert-themed portfolio. Side A: case work. Side B: real-world impact. Press play.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nguyen Huyen Linh",
+  "jobTitle": "Business Analyst",
+  "address": { "@type": "PostalAddress", "addressLocality": "Ha Noi", "addressCountry": "VN" },
+  "email": "mailto:huyenlinhnguyen198@gmail.com",
+  "telephone": "+84962338081",
+  "sameAs": ["https://www.linkedin.com/in/linhnguyen198"],
+  "alumniOf": "Foreign Trade University"
+}
+</script>
+</head>
+<body class="gate-active">
+
+<div class="galaxy-depth" aria-hidden="true">
+  <div class="galaxy-depth-layer galaxy-depth-far"></div>
+  <div class="galaxy-depth-layer galaxy-depth-near"></div>
+</div>
+
+<!-- ============ ALBUM GATE: intro tracklist before the portfolio ============ -->
+<div class="album-gate" id="albumGate">
+  <a class="gate-skip" id="gateSkip" href="#main">Skip intro →</a>
+
+  <div class="gate-bg" aria-hidden="true"></div>
+  <div class="gate-scrim" aria-hidden="true"></div>
+  <div class="orbit-field" id="orbitGate" aria-hidden="true"></div>
+
+  <div class="gate-inner">
+    <div class="gate-header">
+      <svg class="gate-disc" viewBox="0 0 100 100" width="64" height="64" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="#15130F"/>
+        <circle cx="50" cy="50" r="20" fill="#F6C947"/>
+        <circle cx="50" cy="50" r="20" fill="none" stroke="#E23B2E" stroke-width="10" stroke-dasharray="16 12"/>
+        <circle cx="50" cy="50" r="4" fill="#15130F"/>
+      </svg>
+      <div class="gate-heading">
+        <p class="eyebrow">Soundtrack for this portfolio</p>
+        <p class="gate-title">Xoay Tròn</p>
+      </div>
+    </div>
+
+    <p class="gate-welcome">Welcome to Huyen Linh's World</p>
+
+    <div class="gate-spotify">
+      <iframe title="La Bàn — Hoàng Dũng, Pixel Neko (Spotify)" style="border-radius:14px" src="https://open.spotify.com/embed/track/5G8D7sPL8mUhrNOm5jC3Sm?utm_source=generator&theme=0" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
+    <button class="btn btn-primary gate-cta" id="startListenBtn" type="button">
+      Enter the Portfolio
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Custom cursor -->
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- Noise / grain overlay for cinematic texture -->
+<div class="grain" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <a class="brand" href="#overture" data-sfx="click">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="28" height="28"><circle cx="20" cy="20" r="18" fill="var(--bg-alt)" stroke="var(--accent)" stroke-width="1.5"/><circle cx="20" cy="20" r="7" fill="var(--highlight)"/><circle cx="20" cy="20" r="2" fill="var(--bg)"/></svg>
+    </span>
+    <span class="brand-text">Nguyen Huyen Linh</span>
+  </a>
+
+  <nav class="nav-links" id="navLinks" aria-label="Section navigation">
+    <a href="#overture" data-sfx="click">Overture</a>
+    <a href="#tracklist" data-sfx="click">Tracklist</a>
+    <a href="#backstage" data-sfx="click">Backstage</a>
+    <a href="#tour" data-sfx="click">Tour Dates</a>
+    <a href="#encore" data-sfx="click">Encore</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button class="icon-btn lights-btn" id="lightsToggle" type="button" aria-pressed="false" aria-label="Toggle stage lights and play music">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a6 6 0 00-3.6 10.8c.5.4.6.9.6 1.5V16h6v-1.7c0-.6.1-1.1.6-1.5A6 6 0 0012 2z" fill="currentColor"/><rect x="10" y="18" width="4" height="2" rx="1" fill="currentColor"/><rect x="10.5" y="21" width="3" height="1.4" rx="0.7" fill="currentColor"/></svg>
+      <span class="lights-label">Lights On</span>
+    </button>
+    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ NOW PLAYING: persistent soundtrack while browsing ============ -->
+  <div class="now-playing" id="nowPlaying">
+    <div class="now-playing-head">
+      <button class="now-playing-toggle" id="nowPlayingToggle" type="button" aria-expanded="true">
+        <span class="now-playing-label">🎧 Now Playing — Bức Tranh Và Cánh Chim</span>
+        <svg class="now-playing-chevron" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="now-playing-mute" id="nowPlayingMute" type="button" aria-pressed="false" aria-label="Mute music">
+        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" hidden><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l4 4m0-4l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="now-playing-body" id="nowPlayingBody">
+      <iframe id="nowPlayingFrame" title="Bức Tranh Và Cánh Chim — Hoàng Dũng, Lelarec (Spotify)" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+    </div>
+  </div>
+
+  <!-- ============ HERO: THE OVERTURE ============ -->
+  <section class="overture" id="overture">
+    <div class="overture-glow" aria-hidden="true"></div>
+
+    <div class="starfield" aria-hidden="true">
+      <span class="twinkle-star" style="--x:12%;--y:16%;--delay:0s"></span>
+      <span class="twinkle-star" style="--x:84%;--y:10%;--delay:.6s"></span>
+      <span class="twinkle-star" style="--x:92%;--y:52%;--delay:1.3s"></span>
+      <span class="twinkle-star" style="--x:6%;--y:60%;--delay:1.9s"></span>
+      <span class="twinkle-star" style="--x:48%;--y:6%;--delay:.9s"></span>
+      <span class="twinkle-star" style="--x:64%;--y:86%;--delay:2.4s"></span>
+    </div>
+
+    <div class="orbit-field" id="orbitHero" aria-hidden="true"></div>
+
+    <div class="overture-inner">
+      <p class="eyebrow">Now Staging</p>
+      <div class="turntable" id="turntable">
+        <div class="tt-plinth">
+          <div class="tt-vinyl" id="ttVinyl">
+            <div class="tt-label" aria-label="Nguyen Huyen Linh"></div>
+            <div class="tt-grooves" aria-hidden="true"></div>
+          </div>
+          <div class="tt-tonearm" id="ttTonearm">
+            <div class="tt-tonearm-head"></div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="overture-title">Nguyen Huyen Linh</h1>
+      <p class="overture-role">Business&nbsp;Analyst <span class="dot">·</span> Ha&nbsp;Noi, Vietnam</p>
+      <p class="overture-tagline">A 3rd-year International Economics student at Foreign Trade University, composing seamlessly functional software as a Business Analyst. Acting as a "Product Director" bridging business needs and tech solutions — BPMN, BRD/SRS documentation, API testing. Seeking a BA Intern/Fresher role to help orchestrate high-impact digital products.</p>
+
+      <div class="overture-cta">
+        <button class="btn btn-primary" id="playIntroBtn" type="button" data-sfx="none">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          <span id="playIntroLabel">Play Album</span>
+        </button>
+        <a class="btn btn-ghost" href="#tracklist" data-sfx="click">View Tracklist</a>
+      </div>
+
+      <p class="overture-meta">Side&nbsp;A · Side&nbsp;B — 6 tracks · Est. 2023 · Foreign Trade University</p>
+
+      <a href="#tracklist" class="scroll-cue" aria-label="Scroll to tracklist" data-sfx="click">
+        <span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ TRACKLIST: PROJECTS ============ -->
+  <section class="tracklist" id="tracklist">
+    <div class="orbit-field" id="orbitTracklist" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Track 02</p>
+      <h2>The Tracklist</h2>
+      <p class="section-sub">Case work and real-world cuts, played track by track. Tap any track to open the liner notes.</p>
+    </div>
+
+    <div class="tracklist-grid">
+      <div class="tracklist-stage reveal" aria-hidden="true">
+        <div class="stage-spotlight"></div>
+        <div class="stage-vinyl" id="stageVinyl">
+          <div class="stage-vinyl-label" id="stageVinylLabel">
+            <span id="stageVinylTrack">01</span>
+          </div>
+        </div>
+        <p class="stage-caption" id="stageCaption">Hover or tap a track</p>
+      </div>
+
+      <div class="tracklist-sides">
+        <div class="side reveal" data-side="A">
+          <h3 class="side-title">Side A <span>— Case Work</span></h3>
+          <ol class="track-list" id="sideA"></ol>
+        </div>
+        <div class="side reveal" data-side="B">
+          <h3 class="side-title">Side B <span>— Real-World Cuts</span></h3>
+          <ol class="track-list" id="sideB"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BACKSTAGE PASS: ABOUT ============ -->
+  <section class="backstage" id="backstage">
+    <div class="orbit-field" id="orbitBackstage" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Track 03</p>
+      <h2>Backstage Pass</h2>
+      <p class="section-sub">All-access details on the person behind the specs.</p>
+    </div>
+
+    <div class="pass-wrap reveal">
+      <div class="pass-card">
+        <div class="pass-strap" aria-hidden="true"></div>
+        <div class="pass-top">
+          <span class="pass-allaccess">ALL ACCESS</span>
+          <span class="pass-num">No. 001</span>
+        </div>
+        <div class="pass-photo" aria-hidden="true"></div>
+        <h3 class="pass-name">Nguyen Huyen Linh</h3>
+        <p class="pass-role">Genre: Business Analysis</p>
+
+        <dl class="pass-facts">
+          <div><dt>Status</dt><dd>BA Intern / Fresher</dd></div>
+          <div><dt>Next residency</dt><dd>Senior BA (3–4 yr tour)</dd></div>
+          <div><dt>Home venue</dt><dd>Ha Noi, Vietnam</dd></div>
+          <div><dt>Label</dt><dd>Foreign Trade University</dd></div>
+        </dl>
+
+        <p class="pass-bio">3rd-year International Economics student at Foreign Trade University (GPA 3.27/4.0, IELTS 6.5), acting as a "Product Director" bridging business needs and tech solutions. Trained hands-on in BPMN, BRD/FRD/SRS, user flows, and API testing — booking her first full-time gig as a BA Intern/Fresher.</p>
+
+        <div class="pass-qr">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=https://www.linkedin.com/in/linhnguyen198&color=15130F&bgcolor=F4F1E9" alt="QR code linking to Nguyen Huyen Linh's LinkedIn profile" width="90" height="90" loading="lazy">
+          <span class="pass-qr-label">Scan for<br>LinkedIn</span>
+        </div>
+        <div class="pass-teeth" aria-hidden="true"></div>
+      </div>
+
+      <div class="lineup">
+        <div class="lineup-block">
+          <h4>Line-up <span>— Business Analysis</span></h4>
+          <ul class="tag-list" id="skillsBA"></ul>
+        </div>
+        <div class="lineup-block">
+          <h4>Equipment <span>— Tools &amp; Data</span></h4>
+          <ul class="tag-list" id="skillsTools"></ul>
+        </div>
+        <div class="lineup-block">
+          <h4>Crew <span>— Interpersonal</span></h4>
+          <ul class="tag-list" id="skillsSoft"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORLD TOUR DATES: EXPERIENCE ============ -->
+  <section class="tour" id="tour">
+    <div class="orbit-field" id="orbitTour" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Track 04</p>
+      <h2>World Tour Dates</h2>
+      <p class="section-sub">Education, training and work — mapped like a tour poster.</p>
+    </div>
+
+    <ol class="tour-list reveal" id="tourList"></ol>
+  </section>
+
+  <!-- ============ ENCORE: CONTACT ============ -->
+  <section class="encore" id="encore">
+    <div class="orbit-field" id="orbitEncore" aria-hidden="true"></div>
+    <div class="encore-inner reveal">
+      <p class="eyebrow">Final Track</p>
+      <h2 class="neon">Want an Encore?</h2>
+      <p class="section-sub">Let's put your project on the set list.</p>
+
+      <div class="encore-grid">
+        <form class="request-sheet" id="requestForm">
+          <p class="sheet-title">Song Request Sheet</p>
+          <label for="reqName">Your name</label>
+          <input id="reqName" name="reqName" type="text" autocomplete="name" required>
+
+          <label for="reqEmail">Your email</label>
+          <input id="reqEmail" name="reqEmail" type="email" autocomplete="email" required>
+
+          <label for="reqMsg">Request (what do you need help with?)</label>
+          <textarea id="reqMsg" name="reqMsg" rows="4" required></textarea>
+
+          <button class="btn btn-primary" type="submit" data-sfx="click">Send Request</button>
+          <p class="sheet-note">Opens your email app — nothing is stored or sent anywhere else.</p>
+        </form>
+
+        <div class="ticket-stubs">
+          <a class="stub" href="mailto:huyenlinhnguyen198@gmail.com" data-sfx="click">
+            <span class="stub-label">Email</span>
+            <span class="stub-value">huyenlinhnguyen198@gmail.com</span>
+          </a>
+          <a class="stub" href="tel:+84962338081" data-sfx="click">
+            <span class="stub-label">Phone</span>
+            <span class="stub-value">(+84) 96 233 8081</span>
+          </a>
+          <a class="stub" href="https://www.linkedin.com/in/linhnguyen198" target="_blank" rel="noopener" data-sfx="click">
+            <span class="stub-label">LinkedIn</span>
+            <span class="stub-value">linkedin.com/in/linhnguyen198</span>
+          </a>
+          <a class="stub" href="#overture" data-sfx="click">
+            <span class="stub-label">Venue</span>
+            <span class="stub-value">Ha Noi, Vietnam</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>🎙 Thanks for coming to the show. No refunds, only feedback.</p>
+  <p class="fine-print">Designed &amp; coded independently — powered by vinyl and coffee. © <span id="year"></span> Nguyen Huyen Linh.</p>
+</footer>
+
+<!-- ============ TRACK MODAL (Lyric Booklet) ============ -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal-booklet" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalBooklet">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close booklet">×</button>
+    <p class="modal-track-no" id="modalTrackNo">01</p>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <p class="modal-subtitle" id="modalSubtitle"></p>
+    <ul class="modal-tags" id="modalTags"></ul>
+    <p class="modal-liner-label">Liner Notes</p>
+    <ul class="modal-details" id="modalDetails"></ul>
+    <p class="modal-date" id="modalDate"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
