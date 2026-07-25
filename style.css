@@ -675,9 +675,9 @@ body.reduce-motion .tt-vinyl{ animation:none; }
 .modal-backdrop{
   position:fixed; inset:0; background:rgba(10,8,7,.55); backdrop-filter:blur(4px);
   display:flex; align-items:center; justify-content:center; z-index:1000; padding:1.5rem;
-  opacity:0; transition:opacity var(--speed);
+  opacity:0; pointer-events:none; transition:opacity var(--speed);
 }
-.modal-backdrop.show{ opacity:1; }
+.modal-backdrop.show{ opacity:1; pointer-events:auto; }
 .modal-booklet{
   position:relative; max-width:520px; width:100%; max-height:85vh; overflow-y:auto;
   background:var(--bg-alt); border:1px solid var(--line-strong); border-radius:16px; padding:2.4rem 2rem;
