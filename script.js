@@ -533,10 +533,26 @@
     });
     skipLink.addEventListener("click", (e) => { e.preventDefault(); enter(false); });
     if (backBtn) backBtn.addEventListener("click", backToGate);
+
+    // a click anywhere on the gate pops a small spinning vinyl disc right
+    // at the click point — a one-off effect, not a cursor that follows around
+    gate.addEventListener("click", (e) => spawnGateVinyl(e.clientX, e.clientY));
   }
 
-  /* -------------------- GATE FX: flying notes -------------------- */
+  /* -------------------- GATE FX: flying notes + click vinyl -------------------- */
   const NOTE_GLYPHS = ["𝄞", "♪", "♫"];
+  const GATE_VINYL_SVG = '<svg viewBox="0 0 40 40" width="26" height="26"><circle cx="20" cy="20" r="19" fill="#15130F"/><circle cx="20" cy="20" r="8" fill="#F6C947"/><circle cx="20" cy="20" r="8" fill="none" stroke="#E23B2E" stroke-width="4" stroke-dasharray="7 5"/><circle cx="20" cy="20" r="2" fill="#15130F"/></svg>';
+
+  function spawnGateVinyl(x, y) {
+    const el = document.createElement("span");
+    el.className = "gate-vinyl-spawn";
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+    el.innerHTML = GATE_VINYL_SVG;
+    document.body.appendChild(el);
+    el.addEventListener("animationend", () => el.remove());
+    setTimeout(() => { if (el.isConnected) el.remove(); }, 1400);
+  }
 
   function spawnGateNote(x, y) {
     const el = document.createElement("span");
@@ -746,9 +762,8 @@
     });
   }
 
-  /* -------------------- CURSOR: spotlight + pick (+ gate vinyl) -------------------- */
+  /* -------------------- CURSOR: spotlight + pick -------------------- */
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const gateCursorVinyl = document.getElementById("gateCursorVinyl");
   if (supportsHover) {
     const dot = document.querySelector(".cursor-dot");
     const glow = document.querySelector(".cursor-glow");
@@ -769,7 +784,6 @@
     });
     (function loop() {
       glow.style.transform = "translate(" + gx + "px," + gy + "px) translate(-50%,-50%)";
-      if (gateCursorVinyl) gateCursorVinyl.style.transform = "translate(" + gx + "px," + gy + "px) translate(-50%,-50%)";
       requestAnimationFrame(loop);
     })();
   }

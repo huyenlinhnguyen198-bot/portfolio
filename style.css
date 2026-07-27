@@ -223,16 +223,16 @@ body.gate-active .site-footer{ display:none; }
 .gate-header .eyebrow{ color:var(--highlight); margin-bottom:.2rem; text-align:center; }
 .gate-title{ font-family:var(--font-display); font-weight:600; font-size:clamp(2.6rem,9vw,4.4rem); text-shadow:0 4px 24px rgba(0,0,0,.5); }
 
-/* white, all-caps title arching along a single parabola-shaped line */
-.gate-title-arc{ width:100%; max-width:480px; height:auto; overflow:visible; }
+/* yellow, all-caps title arching along a single parabola-shaped line */
+.gate-title-arc{ width:100%; max-width:540px; height:auto; overflow:visible; }
 .gate-title-arc text{
   font-family:var(--font-display); font-weight:700;
-  font-size:44px; letter-spacing:.02em;
+  font-size:58px; letter-spacing:.02em;
   text-transform:uppercase;
-  fill:#FFFFFF;
+  fill:#F6C947;
 }
 .gate-title-arc textPath{ paint-order:stroke; }
-@media (max-width:480px){ .gate-title-arc text{ font-size:34px; } }
+@media (max-width:480px){ .gate-title-arc text{ font-size:40px; } }
 
 .gate-cta{ display:flex; width:fit-content; margin:0 auto; }
 
@@ -246,15 +246,21 @@ body.gate-active .site-footer{ display:none; }
 .gate-spotify iframe{ display:block; }
 @media (max-width:640px){ .gate-spotify{ right:.8rem; bottom:.8rem; width:240px; } }
 
-/* mouse cursor becomes a tiny spinning vinyl disc while the gate is up */
-.gate-cursor-vinyl{
-  position:fixed; top:0; left:0; z-index:2100; pointer-events:none;
-  opacity:0; transition:opacity .2s;
-  animation:spin 3.2s linear infinite;
+/* a click on the gate pops a tiny spinning vinyl disc at the click point —
+   one-off, not a cursor that trails around */
+.gate-vinyl-spawn{
+  position:fixed; z-index:2500; pointer-events:none;
+  transform:translate(-50%,-50%);
+  animation:gateVinylPop .9s ease-out forwards;
 }
-body.gate-active.cursor-ready .gate-cursor-vinyl{ opacity:1; }
-body.gate-active .cursor-dot, body.gate-active .cursor-glow{ opacity:0 !important; }
-@media (hover:none),(pointer:coarse){ .gate-cursor-vinyl{ display:none; } }
+@keyframes gateVinylPop{
+  0%{ transform:translate(-50%,-50%) scale(.3) rotate(0deg); opacity:0; }
+  15%{ opacity:1; }
+  100%{ transform:translate(-50%,-50%) scale(1) rotate(300deg); opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .gate-vinyl-spawn{ display:none; }
+}
 
 /* floating music notes / treble clefs drifting up over the gate background */
 .note-field{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
