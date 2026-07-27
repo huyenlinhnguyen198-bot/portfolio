@@ -15,7 +15,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 <script type="application/ld+json">
@@ -56,22 +56,40 @@
     <span class="note-fly n6">♫</span>
     <span class="note-fly n7">𝄞</span>
     <span class="note-fly n8">♪</span>
+    <span class="note-fly n9">♫</span>
+    <span class="note-fly n10">𝄞</span>
+    <span class="note-fly n11">♪</span>
+    <span class="note-fly n12">♫</span>
+    <span class="note-fly n13">𝄞</span>
+    <span class="note-fly n14">♪</span>
+    <span class="note-fly n15">♫</span>
+  </div>
+
+  <div class="gate-cursor-vinyl" id="gateCursorVinyl" aria-hidden="true">
+    <svg viewBox="0 0 40 40" width="30" height="30"><circle cx="20" cy="20" r="19" fill="#15130F"/><circle cx="20" cy="20" r="8" fill="#F6C947"/><circle cx="20" cy="20" r="8" fill="none" stroke="#E23B2E" stroke-width="4" stroke-dasharray="7 5"/><circle cx="20" cy="20" r="2" fill="#15130F"/></svg>
   </div>
 
   <div class="gate-inner">
     <div class="gate-header">
       <p class="eyebrow" data-i18n="gate.eyebrow">Soundtrack for this portfolio</p>
-      <p class="gate-title gate-title-script" data-i18n="gate.welcome">Welcome to Huyen Linh's Music Concert</p>
-    </div>
-
-    <div class="gate-spotify">
-      <iframe title="La Bàn — Hoàng Dũng, Pixel Neko (Spotify)" style="border-radius:12px" src="https://open.spotify.com/embed/track/5G8D7sPL8mUhrNOm5jC3Sm?utm_source=generator&theme=0&autoplay=1" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+      <svg class="gate-title-arc" viewBox="0 0 600 150" role="img" aria-label="Welcome to Huyen Linh's Music Concert">
+        <defs>
+          <path id="gateTitleArc" d="M 10,130 Q 300,-10 590,130" fill="none"/>
+        </defs>
+        <text>
+          <textPath href="#gateTitleArc" startOffset="50%" text-anchor="middle" textLength="560" lengthAdjust="spacingAndGlyphs" data-i18n="gate.welcome">Welcome to Huyen Linh's Music Concert</textPath>
+        </text>
+      </svg>
     </div>
 
     <button class="btn btn-primary gate-cta" id="startListenBtn" type="button">
-      <span data-i18n="gate.cta">Enter the Portfolio</span>
+      <span data-i18n="gate.cta">Discover the Concert</span>
       <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
+  </div>
+
+  <div class="gate-spotify" id="gateSpotify">
+    <iframe title="La Bàn — Hoàng Dũng, Pixel Neko (Spotify)" src="https://open.spotify.com/embed/track/5G8D7sPL8mUhrNOm5jC3Sm?utm_source=generator&theme=0&autoplay=1" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
   </div>
 </div>
 

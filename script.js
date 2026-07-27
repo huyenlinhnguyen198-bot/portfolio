@@ -17,7 +17,7 @@
       "gate.skip": "Skip intro →",
       "gate.eyebrow": "Soundtrack for this portfolio",
       "gate.welcome": "Welcome to Huyen Linh's Music Concert",
-      "gate.cta": "Enter the Portfolio",
+      "gate.cta": "Discover the Concert",
       "nav.overture": "Overture",
       "nav.tracklist": "Tracklist",
       "nav.backstage": "Backstage",
@@ -88,7 +88,7 @@
       "gate.skip": "Bỏ qua phần giới thiệu →",
       "gate.eyebrow": "Nhạc nền của portfolio này",
       "gate.welcome": "Chào Mừng Đến Với Đêm Nhạc Của Huyền Linh",
-      "gate.cta": "Vào Xem Portfolio",
+      "gate.cta": "Khám Phá Concert Này",
       "nav.overture": "Mở Màn",
       "nav.tracklist": "Tracklist",
       "nav.backstage": "Hậu Trường",
@@ -527,9 +527,37 @@
       if (typeof updateNowPlayingLabel === "function") updateNowPlayingLabel();
     }
 
-    startBtn.addEventListener("click", () => enter(true));
+    startBtn.addEventListener("click", (e) => {
+      burstGateNotes(e.clientX, e.clientY);
+      enter(true);
+    });
     skipLink.addEventListener("click", (e) => { e.preventDefault(); enter(false); });
     if (backBtn) backBtn.addEventListener("click", backToGate);
+  }
+
+  /* -------------------- GATE FX: flying notes -------------------- */
+  const NOTE_GLYPHS = ["𝄞", "♪", "♫"];
+
+  function spawnGateNote(x, y) {
+    const el = document.createElement("span");
+    el.className = "note-spawn";
+    el.textContent = NOTE_GLYPHS[Math.floor(Math.random() * NOTE_GLYPHS.length)];
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+    el.style.fontSize = (1 + Math.random() * 1.2) + "rem";
+    el.style.setProperty("--drift", (Math.random() * 70 - 35) + "px");
+    document.body.appendChild(el);
+    el.addEventListener("animationend", () => el.remove());
+    setTimeout(() => { if (el.isConnected) el.remove(); }, 2200);
+  }
+
+  /* a little cascading burst of notes — plays when "Discover the Concert" is clicked */
+  function burstGateNotes(x, y) {
+    for (let i = 0; i < 14; i++) {
+      setTimeout(() => {
+        spawnGateNote(x + (Math.random() * 140 - 70), y + (Math.random() * 70 - 35));
+      }, i * 35);
+    }
   }
 
   /* -------------------- RENDER -------------------- */
@@ -718,22 +746,40 @@
     });
   }
 
-  /* -------------------- CURSOR: spotlight + pick -------------------- */
+  /* -------------------- CURSOR: spotlight + pick (+ gate vinyl) -------------------- */
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const gateCursorVinyl = document.getElementById("gateCursorVinyl");
   if (supportsHover) {
     const dot = document.querySelector(".cursor-dot");
     const glow = document.querySelector(".cursor-glow");
     let gx = window.innerWidth / 2, gy = window.innerHeight / 2;
+    let lastGateNote = 0;
     document.addEventListener("mousemove", (e) => {
       document.body.classList.add("cursor-ready");
       dot.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px) translate(-50%,-50%)";
       gx = e.clientX; gy = e.clientY;
+      // while the gate is up, the cursor trails little musical notes as it moves
+      if (document.body.classList.contains("gate-active")) {
+        const now = performance.now();
+        if (now - lastGateNote > 150) {
+          lastGateNote = now;
+          spawnGateNote(gx, gy);
+        }
+      }
     });
     (function loop() {
       glow.style.transform = "translate(" + gx + "px," + gy + "px) translate(-50%,-50%)";
+      if (gateCursorVinyl) gateCursorVinyl.style.transform = "translate(" + gx + "px," + gy + "px) translate(-50%,-50%)";
       requestAnimationFrame(loop);
     })();
   }
+
+  // touch devices: a tap on the gate spawns a note at the touch point
+  document.addEventListener("touchstart", (e) => {
+    if (!document.body.classList.contains("gate-active")) return;
+    const touch = e.touches[0];
+    if (touch) spawnGateNote(touch.clientX, touch.clientY);
+  }, { passive: true });
 
   /* -------------------- SCROLL: vinyl speed + tonearm -------------------- */
   const vinyl = document.getElementById("ttVinyl");
