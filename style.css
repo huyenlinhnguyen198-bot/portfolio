@@ -328,8 +328,7 @@ section{ position:relative; padding:7rem 1.5rem; max-width:var(--container); mar
   transition:border-color var(--speed-fast), color var(--speed-fast);
 }
 .icon-btn:hover{ color:var(--highlight); border-color:var(--highlight); }
-.lights-label{ display:none; }
-@media (min-width:900px){ .lights-label{ display:inline; } }
+.lang-code{ font-family:var(--font-mono); font-weight:700; letter-spacing:.04em; font-size:.76rem; }
 
 .hamburger{ display:none; flex-direction:column; gap:4px; padding:.5rem; }
 .hamburger span{ width:20px; height:2px; background:var(--text); transition:transform var(--speed-fast), opacity var(--speed-fast); }

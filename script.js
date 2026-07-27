@@ -4,98 +4,366 @@
 (function () {
   "use strict";
 
-  /* -------------------- DATA (from CV) -------------------- */
+  /* -------------------- LANGUAGE: EN / VI -------------------- */
+  const LANG_KEY = "hlinh-lang";
+  let currentLang = "en";
+
+  /* Every piece of static copy on the page, in both languages.
+     Dynamic data (project cards, tour stops, skills) is translated
+     separately, right alongside its source data below. */
+  const I18N = {
+    en: {
+      "meta.title": "Nguyen Huyen Linh — Business Analyst | Live at the Console",
+      "gate.skip": "Skip intro →",
+      "gate.eyebrow": "Soundtrack for this portfolio",
+      "gate.welcome": "Welcome to Huyen Linh's World",
+      "gate.cta": "Enter the Portfolio",
+      "nav.overture": "Overture",
+      "nav.tracklist": "Tracklist",
+      "nav.backstage": "Backstage",
+      "nav.tour": "Tour Dates",
+      "nav.encore": "Encore",
+      "nav.backAria": "Back to the La Bàn intro",
+      "nav.menuAria": "Open menu",
+      "hero.eyebrow": "Now Staging",
+      "hero.role": "Business&nbsp;Analyst <span class=\"dot\">·</span> Ha&nbsp;Noi, Vietnam",
+      "hero.tagline": "A 3rd-year International Economics student at Foreign Trade University, composing seamlessly functional software as a Business Analyst. Acting as a \"Product Director\" bridging business needs and tech solutions — BPMN, BRD/SRS documentation, API testing. Seeking a BA Intern/Fresher role to help orchestrate high-impact digital products.",
+      "hero.playAlbum": "Play Album",
+      "hero.viewTracklist": "View Tracklist",
+      "hero.meta": "Side&nbsp;A · Side&nbsp;B — 6 tracks · Est. 2023 · Foreign Trade University",
+      "hero.scrollAria": "Scroll to tracklist",
+      "tracklist.eyebrow": "Track 02",
+      "tracklist.h2": "The Tracklist",
+      "tracklist.sub": "Case work and real-world cuts, played track by track. Tap any track to open the liner notes.",
+      "tracklist.stageDefault": "Hover or tap a track",
+      "tracklist.sideA": "Side A <span>— Case Work</span>",
+      "tracklist.sideB": "Side B <span>— Real-World Cuts</span>",
+      "backstage.eyebrow": "Track 03",
+      "backstage.h2": "Backstage Pass",
+      "backstage.sub": "All-access details on the person behind the specs.",
+      "backstage.genre": "Genre: Business Analysis",
+      "backstage.factStatus": "Status",
+      "backstage.factStatusValue": "BA Intern / Fresher",
+      "backstage.factResidency": "Next residency",
+      "backstage.factResidencyValue": "Senior BA (3–4 yr tour)",
+      "backstage.factVenue": "Home venue",
+      "backstage.factVenueValue": "Ha Noi, Vietnam",
+      "backstage.factLabel": "Label",
+      "backstage.factLabelValue": "Foreign Trade University",
+      "backstage.bio": "3rd-year International Economics student at Foreign Trade University (GPA 3.27/4.0, IELTS 6.5), acting as a \"Product Director\" bridging business needs and tech solutions. Trained hands-on in BPMN, BRD/FRD/SRS, user flows, and API testing — booking her first full-time gig as a BA Intern/Fresher.",
+      "backstage.qr": "Scan for<br>LinkedIn",
+      "backstage.lineupBA": "Line-up <span>— Business Analysis</span>",
+      "backstage.lineupTools": "Equipment <span>— Tools &amp; Data</span>",
+      "backstage.lineupSoft": "Crew <span>— Interpersonal</span>",
+      "tour.eyebrow": "Track 04",
+      "tour.h2": "World Tour Dates",
+      "tour.sub": "Education, training and work — mapped like a tour poster.",
+      "encore.eyebrow": "Final Track",
+      "encore.h2": "Want an Encore?",
+      "encore.sub": "Let's put your project on the set list.",
+      "encore.sheetTitle": "Song Request Sheet",
+      "encore.labelName": "Your name",
+      "encore.labelEmail": "Your email",
+      "encore.labelMsg": "Request (what do you need help with?)",
+      "encore.send": "Send Request",
+      "encore.note": "Opens your email app — nothing is stored or sent anywhere else.",
+      "encore.stubEmail": "Email",
+      "encore.stubPhone": "Phone",
+      "encore.stubLinkedin": "LinkedIn",
+      "encore.stubVenue": "Venue",
+      "encore.venueValue": "Ha Noi, Vietnam",
+      "footer.thanks": "🎙 Thanks for coming to the show. No refunds, only feedback.",
+      "footer.fineprint": "Designed &amp; coded independently — powered by vinyl and coffee. © {year} Nguyen Huyen Linh.",
+      "modal.close": "Close booklet",
+      "modal.liner": "Liner Notes",
+      "nowplaying.mute": "Mute music",
+      "nowplaying.unmute": "Unmute music",
+      "nowplaying.defaultLabel": "🎧 Now Playing — Bức Tranh Và Cánh Chim",
+      "nowplaying.letmegoLabel": "🎧 Now Playing — Let Me Go (KIMLONG)",
+      "lang.toEn": "Switch site language to English",
+      "lang.toVi": "Chuyển ngôn ngữ trang sang tiếng Việt"
+    },
+    vi: {
+      "meta.title": "Nguyen Huyen Linh — Business Analyst | Trực Tiếp Tại Sân Khấu",
+      "gate.skip": "Bỏ qua phần giới thiệu →",
+      "gate.eyebrow": "Nhạc nền của portfolio này",
+      "gate.welcome": "Chào mừng đến với Thế Giới của Huyền Linh",
+      "gate.cta": "Vào Xem Portfolio",
+      "nav.overture": "Mở Màn",
+      "nav.tracklist": "Tracklist",
+      "nav.backstage": "Hậu Trường",
+      "nav.tour": "Lịch Lưu Diễn",
+      "nav.encore": "Encore",
+      "nav.backAria": "Quay lại phần giới thiệu La Bàn",
+      "nav.menuAria": "Mở menu",
+      "hero.eyebrow": "Đang Trình Diễn",
+      "hero.role": "Business&nbsp;Analyst <span class=\"dot\">·</span> Hà&nbsp;Nội, Việt Nam",
+      "hero.tagline": "Sinh viên năm 3 ngành Kinh tế Quốc tế tại Đại học Ngoại thương, xây dựng những sản phẩm phần mềm vận hành trơn tru trong vai trò Business Analyst. Đóng vai \"Product Director\" kết nối nhu cầu kinh doanh với giải pháp công nghệ — thành thạo BPMN, tài liệu BRD/SRS, kiểm thử API. Đang tìm kiếm vị trí BA Intern/Fresher để cùng kiến tạo những sản phẩm số có tầm ảnh hưởng.",
+      "hero.playAlbum": "Phát Album",
+      "hero.viewTracklist": "Xem Tracklist",
+      "hero.meta": "Side&nbsp;A · Side&nbsp;B — 6 track · Thành lập 2023 · Đại học Ngoại thương",
+      "hero.scrollAria": "Cuộn xuống phần tracklist",
+      "tracklist.eyebrow": "Track 02",
+      "tracklist.h2": "Tracklist",
+      "tracklist.sub": "Các case study và dự án thực tế, trình bày lần lượt như từng track nhạc. Chạm vào một track để xem chi tiết.",
+      "tracklist.stageDefault": "Di chuột hoặc chạm vào một track",
+      "tracklist.sideA": "Side A <span>— Case Study</span>",
+      "tracklist.sideB": "Side B <span>— Dự Án Thực Tế</span>",
+      "backstage.eyebrow": "Track 03",
+      "backstage.h2": "Vé Hậu Trường",
+      "backstage.sub": "Toàn bộ thông tin về người đứng sau những bản đặc tả này.",
+      "backstage.genre": "Thể loại: Business Analysis",
+      "backstage.factStatus": "Trạng thái",
+      "backstage.factStatusValue": "BA Intern / Fresher",
+      "backstage.factResidency": "Chặng lưu diễn tiếp theo",
+      "backstage.factResidencyValue": "Senior BA (tour 3–4 năm)",
+      "backstage.factVenue": "Sân nhà",
+      "backstage.factVenueValue": "Hà Nội, Việt Nam",
+      "backstage.factLabel": "Hãng đĩa",
+      "backstage.factLabelValue": "Đại học Ngoại thương",
+      "backstage.bio": "Sinh viên năm 3 ngành Kinh tế Quốc tế tại Đại học Ngoại thương (GPA 3.27/4.0, IELTS 6.5), đóng vai \"Product Director\" kết nối nhu cầu kinh doanh với giải pháp công nghệ. Được rèn luyện thực chiến với BPMN, BRD/FRD/SRS, user flow và kiểm thử API — sẵn sàng cho công việc toàn thời gian đầu tiên ở vị trí BA Intern/Fresher.",
+      "backstage.qr": "Quét để xem<br>LinkedIn",
+      "backstage.lineupBA": "Đội Hình <span>— Business Analysis</span>",
+      "backstage.lineupTools": "Trang Thiết Bị <span>— Công cụ &amp; Dữ liệu</span>",
+      "backstage.lineupSoft": "Ê-kíp <span>— Kỹ Năng Mềm</span>",
+      "tour.eyebrow": "Track 04",
+      "tour.h2": "Lịch Lưu Diễn",
+      "tour.sub": "Học vấn, đào tạo và công việc — trình bày như một poster lịch lưu diễn.",
+      "encore.eyebrow": "Track Cuối",
+      "encore.h2": "Muốn Nghe Thêm Encore?",
+      "encore.sub": "Cùng đưa dự án của bạn vào set list nhé.",
+      "encore.sheetTitle": "Phiếu Yêu Cầu Bài Hát",
+      "encore.labelName": "Tên của bạn",
+      "encore.labelEmail": "Email của bạn",
+      "encore.labelMsg": "Yêu cầu (bạn cần hỗ trợ gì?)",
+      "encore.send": "Gửi Yêu Cầu",
+      "encore.note": "Sẽ mở ứng dụng email của bạn — không lưu trữ hay gửi đi bất kỳ đâu khác.",
+      "encore.stubEmail": "Email",
+      "encore.stubPhone": "Điện thoại",
+      "encore.stubLinkedin": "LinkedIn",
+      "encore.stubVenue": "Địa điểm",
+      "encore.venueValue": "Hà Nội, Việt Nam",
+      "footer.thanks": "🎙 Cảm ơn bạn đã đến xem show. Không hoàn vé, chỉ nhận góp ý.",
+      "footer.fineprint": "Tự thiết kế &amp; tự code — chạy bằng đĩa than và cà phê. © {year} Nguyen Huyen Linh.",
+      "modal.close": "Đóng booklet",
+      "modal.liner": "Ghi Chú Chi Tiết",
+      "nowplaying.mute": "Tắt tiếng nhạc",
+      "nowplaying.unmute": "Bật tiếng nhạc",
+      "nowplaying.defaultLabel": "🎧 Đang Phát — Bức Tranh Và Cánh Chim",
+      "nowplaying.letmegoLabel": "🎧 Đang Phát — Let Me Go (KIMLONG)",
+      "lang.toEn": "Switch site language to English",
+      "lang.toVi": "Chuyển ngôn ngữ trang sang tiếng Việt"
+    }
+  };
+
+  function t(key) {
+    const dict = I18N[currentLang] || I18N.en;
+    if (dict[key] !== undefined) return dict[key];
+    return I18N.en[key] !== undefined ? I18N.en[key] : key;
+  }
+
+  /* -------------------- DATA (from CV) — bilingual -------------------- */
   const sideA = [
     {
       track: "01",
-      title: "Forgot Password Flow",
-      subtitle: "Mobile Banking Application · BA Mock Project",
-      tags: ["User Flow", "Wireframe", "Validation"],
-      details: [
-        "Designed the end-to-end user flow and wireframes for the Forgot Password journey.",
-        "Defined business rules, validation logic and error-handling states for edge cases.",
-        "Mapped screen navigation so engineering had an unambiguous build target."
-      ],
-      date: "Jun 2026"
+      date: "Jun 2026",
+      en: {
+        title: "Forgot Password Flow",
+        subtitle: "Mobile Banking Application · BA Mock Project",
+        tags: ["User Flow", "Wireframe", "Validation"],
+        details: [
+          "Designed the end-to-end user flow and wireframes for the Forgot Password journey.",
+          "Defined business rules, validation logic and error-handling states for edge cases.",
+          "Mapped screen navigation so engineering had an unambiguous build target."
+        ]
+      },
+      vi: {
+        title: "Luồng Quên Mật Khẩu",
+        subtitle: "Ứng dụng Ngân hàng Di động · Dự án BA Mô phỏng",
+        tags: ["User Flow", "Wireframe", "Validation"],
+        details: [
+          "Thiết kế luồng người dùng (user flow) và wireframe toàn trình cho hành trình Quên mật khẩu.",
+          "Xác định business rule, logic validate và các trạng thái xử lý lỗi cho từng edge case.",
+          "Vẽ sơ đồ điều hướng màn hình để đội kỹ thuật có mục tiêu xây dựng rõ ràng, không mập mờ."
+        ]
+      }
     },
     {
       track: "02",
-      title: "Customer Appointment Booking",
-      subtitle: "Mobile Banking Application · BA Mock Project",
-      tags: ["BPMN", "Screen Spec", "Error Handling"],
-      details: [
-        "Designed end-to-end flows and wireframes for the appointment booking journey.",
-        "Modeled the underlying system process using BPMN before handoff.",
-        "Covered business rules, validations and error handling across every screen."
-      ],
-      date: "Jun 2026"
+      date: "Jun 2026",
+      en: {
+        title: "Customer Appointment Booking",
+        subtitle: "Mobile Banking Application · BA Mock Project",
+        tags: ["BPMN", "Screen Spec", "Error Handling"],
+        details: [
+          "Designed end-to-end flows and wireframes for the appointment booking journey.",
+          "Modeled the underlying system process using BPMN before handoff.",
+          "Covered business rules, validations and error handling across every screen."
+        ]
+      },
+      vi: {
+        title: "Đặt Lịch Hẹn Khách Hàng",
+        subtitle: "Ứng dụng Ngân hàng Di động · Dự án BA Mô phỏng",
+        tags: ["BPMN", "Screen Spec", "Error Handling"],
+        details: [
+          "Thiết kế luồng và wireframe toàn trình cho hành trình đặt lịch hẹn.",
+          "Mô hình hóa quy trình hệ thống bằng BPMN trước khi bàn giao.",
+          "Bao quát business rule, validate và xử lý lỗi trên từng màn hình."
+        ]
+      }
     },
     {
       track: "03",
-      title: "BRD · FRD · SRS Playbook",
-      subtitle: "Requirements &amp; API Documentation",
-      tags: ["Requirements Doc", "API Logic", "Postman", "DBeaver"],
-      details: [
-        "Documented functional requirements, API logic and integration points across BRD, FRD and SRS.",
-        "Validated APIs using Postman to confirm behaviour matched the written spec.",
-        "Reviewed database structures in DBeaver to sanity-check data models against requirements."
-      ],
-      date: "Jun 2026"
+      date: "Jun 2026",
+      en: {
+        title: "BRD · FRD · SRS Playbook",
+        subtitle: "Requirements &amp; API Documentation",
+        tags: ["Requirements Doc", "API Logic", "Postman", "DBeaver"],
+        details: [
+          "Documented functional requirements, API logic and integration points across BRD, FRD and SRS.",
+          "Validated APIs using Postman to confirm behaviour matched the written spec.",
+          "Reviewed database structures in DBeaver to sanity-check data models against requirements."
+        ]
+      },
+      vi: {
+        title: "Bộ Tài Liệu BRD · FRD · SRS",
+        subtitle: "Tài liệu Yêu cầu &amp; API",
+        tags: ["Requirements Doc", "API Logic", "Postman", "DBeaver"],
+        details: [
+          "Xây dựng tài liệu functional requirement, logic API và các điểm tích hợp trong BRD, FRD và SRS.",
+          "Kiểm thử API bằng Postman để đảm bảo hành vi hệ thống khớp với spec đã viết.",
+          "Rà soát cấu trúc database trong DBeaver để đối chiếu data model với yêu cầu nghiệp vụ."
+        ]
+      }
     }
   ];
 
   const sideB = [
     {
       track: "04",
-      title: "130K Conversations",
-      subtitle: "Everred Group (“Godmother”) · Customer Service Staff",
-      tags: ["TikTok", "Shopee", "Conversion"],
-      details: [
-        "Managed 130,000+ quarterly customer conversations across TikTok and Shopee.",
-        "Supported conversion rates of 37.45% and 24.11% respectively across the two channels.",
-        "Contributed to approximately VND 13.8 billion in quarterly chat-assisted revenue.",
-        "Maintained an average customer satisfaction rate of 80.41% throughout."
-      ],
-      date: "Aug 2025 – Aug 2026"
+      date: "Aug 2025 – Aug 2026",
+      en: {
+        title: "130K Conversations",
+        subtitle: "Everred Group (“Godmother”) · Customer Service Staff",
+        tags: ["TikTok", "Shopee", "Conversion"],
+        details: [
+          "Managed 130,000+ quarterly customer conversations across TikTok and Shopee.",
+          "Supported conversion rates of 37.45% and 24.11% respectively across the two channels.",
+          "Contributed to approximately VND 13.8 billion in quarterly chat-assisted revenue.",
+          "Maintained an average customer satisfaction rate of 80.41% throughout."
+        ]
+      },
+      vi: {
+        title: "130K Cuộc Trò Chuyện",
+        subtitle: "Everred Group (“Godmother”) · Nhân viên Chăm sóc Khách hàng",
+        tags: ["TikTok", "Shopee", "Conversion"],
+        details: [
+          "Xử lý hơn 130.000 cuộc trò chuyện với khách hàng mỗi quý trên TikTok và Shopee.",
+          "Đóng góp vào tỷ lệ chuyển đổi 37,45% và 24,11% tương ứng trên hai kênh.",
+          "Góp phần tạo ra khoảng 13,8 tỷ đồng doanh thu hỗ trợ qua chat mỗi quý.",
+          "Duy trì tỷ lệ hài lòng khách hàng trung bình 80,41% xuyên suốt."
+        ]
+      }
     },
     {
       track: "05",
-      title: "Chart-Topping Research",
-      subtitle: "Economic Research Champion 2025 · YES Scientific Research Club",
-      tags: ["Research", "Top 20 / 120"],
-      details: [
-        "Placed in the Top 20 out of 120 competing teams nationwide.",
-        "Organized by the YES Scientific Research Club, National Economics University."
-      ],
-      date: "Sep 2025"
+      date: "Sep 2025",
+      en: {
+        title: "Chart-Topping Research",
+        subtitle: "Economic Research Champion 2025 · YES Scientific Research Club",
+        tags: ["Research", "Top 20 / 120"],
+        details: [
+          "Placed in the Top 20 out of 120 competing teams nationwide.",
+          "Organized by the YES Scientific Research Club, National Economics University."
+        ]
+      },
+      vi: {
+        title: "Nghiên Cứu Đạt Giải Cao",
+        subtitle: "Quán quân Nghiên cứu Kinh tế 2025 · CLB Nghiên cứu Khoa học YES",
+        tags: ["Nghiên cứu", "Top 20 / 120"],
+        details: [
+          "Lọt Top 20 trong số 120 đội thi trên toàn quốc.",
+          "Do CLB Nghiên cứu Khoa học YES, Đại học Kinh tế Quốc dân tổ chức."
+        ]
+      }
     },
     {
       track: "06",
-      title: "Published Track",
-      subtitle: "Journal of Economics and Business Administration",
-      tags: ["Publication", "Consumer Behaviour"],
-      details: [
-        "“Factors Affecting Students’ Willingness to Pay for Eco-friendly Tote Bags at Foreign Trade University.”",
-        "Accepted for publication in the Journal of Economics and Business Administration."
-      ],
-      date: "Jul 2026"
+      date: "Jul 2026",
+      en: {
+        title: "Published Track",
+        subtitle: "Journal of Economics and Business Administration",
+        tags: ["Publication", "Consumer Behaviour"],
+        details: [
+          "“Factors Affecting Students’ Willingness to Pay for Eco-friendly Tote Bags at Foreign Trade University.”",
+          "Accepted for publication in the Journal of Economics and Business Administration."
+        ]
+      },
+      vi: {
+        title: "Bài Nghiên Cứu Được Xuất Bản",
+        subtitle: "Tạp chí Kinh tế và Quản trị Kinh doanh",
+        tags: ["Xuất bản", "Hành vi Người tiêu dùng"],
+        details: [
+          "“Các yếu tố ảnh hưởng đến sự sẵn lòng chi trả của sinh viên cho túi tote thân thiện môi trường tại Đại học Ngoại thương.”",
+          "Được chấp nhận đăng trên Tạp chí Kinh tế và Quản trị Kinh doanh."
+        ]
+      }
     }
   ];
 
-  const skillsBA = ["Requirements Elicitation & Analysis", "BPMN", "BRD / FRD / SRS", "User Flow Design", "Screen Specification", "API Documentation"];
-  const skillsTools = ["Figma", "Draw.io", "Postman", "DBeaver", "Excel", "Basic Python", "Data Analysis"];
-  const skillsSoft = ["Stakeholder Communication", "Analytical Thinking", "Cross-functional Collaboration", "Presentation", "Problem Solving"];
+  const skillsBA = [
+    { en: "Requirements Elicitation & Analysis", vi: "Thu thập & Phân tích Yêu cầu" },
+    { en: "BPMN", vi: "BPMN" },
+    { en: "BRD / FRD / SRS", vi: "BRD / FRD / SRS" },
+    { en: "User Flow Design", vi: "Thiết kế User Flow" },
+    { en: "Screen Specification", vi: "Đặc tả Màn hình" },
+    { en: "API Documentation", vi: "Tài liệu hóa API" }
+  ];
+  const skillsTools = [
+    { en: "Figma", vi: "Figma" },
+    { en: "Draw.io", vi: "Draw.io" },
+    { en: "Postman", vi: "Postman" },
+    { en: "DBeaver", vi: "DBeaver" },
+    { en: "Excel", vi: "Excel" },
+    { en: "Basic Python", vi: "Python cơ bản" },
+    { en: "Data Analysis", vi: "Phân tích Dữ liệu" }
+  ];
+  const skillsSoft = [
+    { en: "Stakeholder Communication", vi: "Giao tiếp với Stakeholder" },
+    { en: "Analytical Thinking", vi: "Tư duy Phân tích" },
+    { en: "Cross-functional Collaboration", vi: "Phối hợp Liên phòng ban" },
+    { en: "Presentation", vi: "Thuyết trình" },
+    { en: "Problem Solving", vi: "Giải quyết Vấn đề" }
+  ];
 
   const tourStops = [
-    { date: "2021 – 2023", venue: "Live at CLEEN Project — Season 4", role: "Head of Organizing Committee · Led a recycling initiative turning plastic waste into study desks for underprivileged schools in Sapa; ran a 15,000-follower community page and coordinated fundraising, production and distribution." },
-    { date: "Jun 2023 – Jul 2025", venue: "Live at Blossom Grapeseed Kim Dong", role: "English Teaching Assistant" },
-    { date: "2023 — Expected 2027", venue: "Foreign Trade University", role: "International Economics · GPA 3.27/4.0 · IELTS 6.5" },
-    { date: "Nov 2023 – Jun 2024", venue: "Live at FTU Dynamic Club", role: "Member, Project Management Department · Coordinated logistics and cross-team execution for a competition with 1,000+ participants" },
-    { date: "Aug 2025 – Aug 2026", venue: "Live at Everred Group — “Godmother”", role: "Customer Service Staff" },
-    { date: "Sep 2025", venue: "Special Guest — YES Scientific Research Club", role: "Top 20/120, Economic Research Champion 2025" },
-    { date: "Jun 2026", venue: "Live at SmartSotek Company", role: "Hands-on Business Analysis Training (with Ms. Thu, BA Trainer)" },
-    { date: "Jun 2026", venue: "Live at Mobile Banking Application", role: "Business Analyst Mock Project" },
-    { date: "Jul 2026", venue: "Track Released — Journal of Economics and Business Administration", role: "Publication Accepted" }
+    { date: "2021 – 2023",
+      en: { venue: "Live at CLEEN Project — Season 4", role: "Head of Organizing Committee · Led a recycling initiative turning plastic waste into study desks for underprivileged schools in Sapa; ran a 15,000-follower community page and coordinated fundraising, production and distribution." },
+      vi: { venue: "Biểu diễn tại CLEEN Project — Mùa 4", role: "Trưởng Ban Tổ chức · Dẫn dắt dự án tái chế rác thải nhựa thành bàn học cho các trường vùng khó khăn tại Sa Pa; quản lý trang cộng đồng 15.000 người theo dõi và điều phối gây quỹ, sản xuất, phân phối." } },
+    { date: "Jun 2023 – Jul 2025",
+      en: { venue: "Live at Blossom Grapeseed Kim Dong", role: "English Teaching Assistant" },
+      vi: { venue: "Biểu diễn tại Blossom Grapeseed Kim Đồng", role: "Trợ giảng Tiếng Anh" } },
+    { date: "2023 — Expected 2027",
+      en: { venue: "Foreign Trade University", role: "International Economics · GPA 3.27/4.0 · IELTS 6.5" },
+      vi: { venue: "Đại học Ngoại thương", role: "Kinh tế Quốc tế · GPA 3.27/4.0 · IELTS 6.5" } },
+    { date: "Nov 2023 – Jun 2024",
+      en: { venue: "Live at FTU Dynamic Club", role: "Member, Project Management Department · Coordinated logistics and cross-team execution for a competition with 1,000+ participants" },
+      vi: { venue: "Biểu diễn tại FTU Dynamic Club", role: "Thành viên Ban Quản lý Dự án · Điều phối hậu cần và triển khai liên phòng ban cho cuộc thi hơn 1.000 người tham gia" } },
+    { date: "Aug 2025 – Aug 2026",
+      en: { venue: "Live at Everred Group — “Godmother”", role: "Customer Service Staff" },
+      vi: { venue: "Biểu diễn tại Everred Group — “Godmother”", role: "Nhân viên Chăm sóc Khách hàng" } },
+    { date: "Sep 2025",
+      en: { venue: "Special Guest — YES Scientific Research Club", role: "Top 20/120, Economic Research Champion 2025" },
+      vi: { venue: "Khách mời Đặc biệt — CLB Nghiên cứu Khoa học YES", role: "Top 20/120, Quán quân Nghiên cứu Kinh tế 2025" } },
+    { date: "Jun 2026",
+      en: { venue: "Live at SmartSotek Company", role: "Hands-on Business Analysis Training (with Ms. Thu, BA Trainer)" },
+      vi: { venue: "Biểu diễn tại Công ty SmartSotek", role: "Đào tạo thực chiến Business Analysis (cùng Chị Thu, BA Trainer)" } },
+    { date: "Jun 2026",
+      en: { venue: "Live at Mobile Banking Application", role: "Business Analyst Mock Project" },
+      vi: { venue: "Biểu diễn tại Ứng dụng Mobile Banking", role: "Dự án Mô phỏng Business Analyst" } },
+    { date: "Jul 2026",
+      en: { venue: "Track Released — Journal of Economics and Business Administration", role: "Publication Accepted" },
+      vi: { venue: "Phát hành Track — Tạp chí Kinh tế và Quản trị Kinh doanh", role: "Bài viết được chấp nhận đăng" } }
   ];
 
   /* -------------------- ALBUM GATE DATA -------------------- */
@@ -226,8 +494,12 @@
     if (!gate) return;
     const startBtn = document.getElementById("startListenBtn");
     const skipLink = document.getElementById("gateSkip");
+    const backBtn = document.getElementById("backToGateBtn");
 
     function enter(startAudio) {
+      gate.hidden = false; // in case we're re-entering after a "back to gate"
+      gate.classList.remove("closing");
+      gate.offsetHeight; // force reflow so the closing transition can replay cleanly
       gate.classList.add("closing");
       document.body.classList.remove("gate-active");
       setTimeout(() => { gate.hidden = true; }, 500);
@@ -238,11 +510,33 @@
       }
     }
 
+    /* "back to gate" — return to the La Bàn intro screen from anywhere
+       in the portfolio. Stops the persistent track and any Play Album
+       auto-scroll so nothing overlaps with the gate's own La Bàn embed. */
+    function backToGate() {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      document.body.classList.add("gate-active");
+      gate.hidden = false;
+      gate.classList.remove("closing");
+      if (typeof stopAutoScroll === "function") stopAutoScroll();
+      if (nowPlayingFrame) nowPlayingFrame.src = "";
+      nowPlayingLoaded = false;
+      if (nowPlaying) nowPlaying.classList.add("collapsed");
+      activeTrackKey = "nowplaying.defaultLabel";
+      if (typeof updateNowPlayingLabel === "function") updateNowPlayingLabel();
+    }
+
     startBtn.addEventListener("click", () => enter(true));
     skipLink.addEventListener("click", (e) => { e.preventDefault(); enter(false); });
+    if (backBtn) backBtn.addEventListener("click", backToGate);
   }
 
   /* -------------------- RENDER -------------------- */
+  function resolveTrack(item, lang) {
+    const t2 = item[lang] || item.en;
+    return { track: item.track, date: item.date, title: t2.title, subtitle: t2.subtitle, tags: t2.tags, details: t2.details };
+  }
+
   function trackRow(item, index) {
     const li = document.createElement("li");
     const btn = document.createElement("button");
@@ -261,23 +555,25 @@
   }
 
   function renderTracklist() {
-    const allTracks = sideA.concat(sideB);
     const $a = document.getElementById("sideA");
     const $b = document.getElementById("sideB");
-    sideA.forEach((t, i) => $a.appendChild(trackRow(t, i)));
-    sideB.forEach((t, i) => $b.appendChild(trackRow(t, sideA.length + i)));
+    $a.innerHTML = "";
+    $b.innerHTML = "";
+    const resolvedA = sideA.map((item) => resolveTrack(item, currentLang));
+    const resolvedB = sideB.map((item) => resolveTrack(item, currentLang));
+    const allTracks = resolvedA.concat(resolvedB);
+    resolvedA.forEach((tr, i) => $a.appendChild(trackRow(tr, i)));
+    resolvedB.forEach((tr, i) => $b.appendChild(trackRow(tr, resolvedA.length + i)));
 
-    const stage = document.getElementById("stageVinyl");
     const stageTrack = document.getElementById("stageVinylTrack");
     const stageCaption = document.getElementById("stageCaption");
-    const rows = document.querySelectorAll(".track-row");
 
     function setStage(item) {
       stageTrack.textContent = item.track;
       stageCaption.textContent = item.title + " — " + item.subtitle;
     }
 
-    rows.forEach((row) => {
+    document.querySelectorAll("#sideA .track-row, #sideB .track-row").forEach((row) => {
       const idx = Number(row.getAttribute("data-index"));
       const item = allTracks[idx];
       row.addEventListener("mouseenter", () => setStage(item));
@@ -296,21 +592,26 @@
     const ba = document.getElementById("skillsBA");
     const tools = document.getElementById("skillsTools");
     const soft = document.getElementById("skillsSoft");
-    skillsBA.forEach((s) => ba.appendChild(tagLi(s)));
-    skillsTools.forEach((s) => tools.appendChild(tagLi(s)));
-    skillsSoft.forEach((s) => soft.appendChild(tagLi(s)));
+    ba.innerHTML = "";
+    tools.innerHTML = "";
+    soft.innerHTML = "";
+    skillsBA.forEach((s) => ba.appendChild(tagLi(s[currentLang] || s.en)));
+    skillsTools.forEach((s) => tools.appendChild(tagLi(s[currentLang] || s.en)));
+    skillsSoft.forEach((s) => soft.appendChild(tagLi(s[currentLang] || s.en)));
   }
 
   function renderTour() {
     const list = document.getElementById("tourList");
+    list.innerHTML = "";
     tourStops.forEach((stop) => {
+      const tr = stop[currentLang] || stop.en;
       const li = document.createElement("li");
       li.className = "tour-item";
       li.innerHTML =
         '<span class="tour-date">' + stop.date + '</span>' +
         '<span>' +
-          '<span class="tour-venue">' + stop.venue + '</span>' +
-          '<span class="tour-role">' + stop.role + '</span>' +
+          '<span class="tour-venue">' + tr.venue + '</span>' +
+          '<span class="tour-role">' + tr.role + '</span>' +
         '</span>';
       list.appendChild(li);
     });
@@ -329,7 +630,7 @@
 
     const tagsEl = document.getElementById("modalTags");
     tagsEl.innerHTML = "";
-    item.tags.forEach((t) => tagsEl.appendChild(tagLi(t)));
+    item.tags.forEach((tg) => tagsEl.appendChild(tagLi(tg)));
 
     const detailsEl = document.getElementById("modalDetails");
     detailsEl.innerHTML = "";
@@ -374,29 +675,47 @@
     hamburger.setAttribute("aria-expanded", "false");
   }));
 
-  /* -------------------- THEME: Lights On/Off -------------------- */
-  const lightsBtn = document.getElementById("lightsToggle");
-  const lightsLabel = lightsBtn.querySelector(".lights-label");
-  const THEME_KEY = "hlinh-theme";
+  /* -------------------- LANGUAGE: apply + toggle button -------------------- */
+  const langBtn = document.getElementById("langToggle");
+  const langCode = document.getElementById("langCode");
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    const on = theme === "lights-on";
-    lightsLabel.textContent = on ? "Lights On" : "Lights Off";
-    lightsBtn.setAttribute("aria-pressed", String(on));
+  function applyLanguage(lang) {
+    currentLang = lang === "vi" ? "vi" : "en";
+    document.documentElement.lang = currentLang;
+    localStorage.setItem(LANG_KEY, currentLang);
+    document.title = t("meta.title");
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t(el.getAttribute("data-i18n"));
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      el.innerHTML = t(el.getAttribute("data-i18n-html"));
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+      el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria")));
+    });
+
+    const finePrint = document.querySelector(".fine-print");
+    if (finePrint) finePrint.innerHTML = t("footer.fineprint").replace("{year}", String(new Date().getFullYear()));
+
+    if (langCode) langCode.textContent = currentLang === "vi" ? "VI" : "EN";
+    if (langBtn) {
+      langBtn.setAttribute("aria-pressed", String(currentLang === "vi"));
+      langBtn.setAttribute("aria-label", currentLang === "vi" ? t("lang.toEn") : t("lang.toVi"));
+    }
+
+    renderTracklist();
+    renderSkills();
+    renderTour();
+    if (typeof reflectMuteState === "function") reflectMuteState();
+    if (typeof updateNowPlayingLabel === "function") updateNowPlayingLabel();
   }
 
-  const savedTheme = localStorage.getItem(THEME_KEY);
-  applyTheme(savedTheme === "lights-off" ? "lights-off" : "lights-on");
-
-  lightsBtn.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme");
-    const next = current === "lights-on" ? "lights-off" : "lights-on";
-    applyTheme(next);
-    localStorage.setItem(THEME_KEY, next);
-    audio.click();
-    revealNowPlaying(true);
-  });
+  if (langBtn) {
+    langBtn.addEventListener("click", () => {
+      applyLanguage(currentLang === "en" ? "vi" : "en");
+    });
+  }
 
   /* -------------------- CURSOR: spotlight + pick -------------------- */
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -452,9 +771,9 @@
     revealEls.forEach((el) => el.classList.add("in-view"));
   }
 
-  /* -------------------- AUDIO: only the real Hoang Dung track plays --------
-     The synthesized vinyl-crackle / lofi pad has been removed per request.
-     "audio" is kept as a harmless stub so existing call sites don't break. */
+  /* -------------------- AUDIO: only the real Hoang Dung / KIMLONG tracks
+     play — no synthesized vinyl-crackle or lofi pad. "audio" is kept as a
+     harmless stub so existing call sites (button clicks) don't break. */
   const audio = {
     startAmbience: function () {},
     stopAmbience: function () {},
@@ -467,7 +786,7 @@
   const playIntroBtn = document.getElementById("playIntroBtn");
   const playIntroLabel = document.getElementById("playIntroLabel");
   playIntroBtn.addEventListener("click", () => {
-    revealNowPlaying(true);
+    playAlbumTrack();
   });
 
   /* -------------------- ENCORE: mailto form -------------------- */
@@ -492,6 +811,13 @@
   const SPOTIFY_TRACK_SRC = "https://open.spotify.com/embed/track/2q6qZMPd4lNMCkvc06s7zs?utm_source=generator&theme=0&autoplay=1";
   let nowPlayingLoaded = false;
   let nowPlayingMuted = false;
+  let activeTrackKey = "nowplaying.defaultLabel";
+
+  function updateNowPlayingLabel() {
+    if (!nowPlaying) return;
+    const label = nowPlaying.querySelector(".now-playing-label");
+    if (label) label.textContent = t(activeTrackKey);
+  }
 
   function loadNowPlaying() {
     if (nowPlayingLoaded || !nowPlayingFrame) return;
@@ -499,9 +825,9 @@
     nowPlayingFrame.src = SPOTIFY_TRACK_SRC;
   }
 
-  /* every "play" trigger in the site (Lights On, Play Album button, the
-     album gate) funnels through here — if the user has muted via the
-     single speaker icon on the widget, respect that and stay silent */
+  /* every default "play" trigger in the site (Lights-era toggle, the album
+     gate) funnels through here — if the user has muted via the single
+     speaker icon on the widget, respect that and stay silent */
   function revealNowPlaying(pulse) {
     if (!nowPlaying || nowPlayingMuted) return;
     loadNowPlaying();
@@ -525,7 +851,7 @@
   function reflectMuteState() {
     if (!nowPlayingMute) return;
     nowPlayingMute.setAttribute("aria-pressed", String(nowPlayingMuted));
-    nowPlayingMute.setAttribute("aria-label", nowPlayingMuted ? "Unmute music" : "Mute music");
+    nowPlayingMute.setAttribute("aria-label", t(nowPlayingMuted ? "nowplaying.unmute" : "nowplaying.mute"));
     if (muteIconOn) muteIconOn.hidden = nowPlayingMuted;
     if (muteIconOff) muteIconOff.hidden = !nowPlayingMuted;
   }
@@ -540,12 +866,61 @@
         nowPlayingLoaded = false;
         if (nowPlaying) nowPlaying.classList.add("collapsed");
         if (nowPlayingToggle) nowPlayingToggle.setAttribute("aria-expanded", "false");
+        stopAutoScroll();
       } else {
         loadNowPlaying();
         if (nowPlaying) nowPlaying.classList.remove("collapsed");
         if (nowPlayingToggle) nowPlayingToggle.setAttribute("aria-expanded", "true");
       }
     });
+  }
+
+  /* -------------------- PLAY ALBUM: "Let Me Go" (KIMLONG) + a slow
+     auto-scroll timed to finish exactly when the track ends -------------------- */
+  const PLAY_ALBUM_TRACK_SRC = "https://open.spotify.com/embed/track/4jZgqPV3l6PHoYgE2S5wLi?utm_source=generator&theme=0&autoplay=1";
+  const PLAY_ALBUM_DURATION_MS = 176000; // "let me go" — KIMLONG, 2:56
+
+  let autoScrollRaf = null;
+  function cancelAutoScrollOnInput() { stopAutoScroll(); }
+  function stopAutoScroll() {
+    if (autoScrollRaf !== null) {
+      cancelAnimationFrame(autoScrollRaf);
+      autoScrollRaf = null;
+    }
+    window.removeEventListener("wheel", cancelAutoScrollOnInput);
+    window.removeEventListener("touchstart", cancelAutoScrollOnInput);
+    window.removeEventListener("keydown", cancelAutoScrollOnInput);
+  }
+  function startAutoScroll(durationMs) {
+    stopAutoScroll();
+    const startY = window.scrollY;
+    const endY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const startTime = performance.now();
+    function step(now) {
+      const progress = Math.min(1, (now - startTime) / durationMs);
+      window.scrollTo(0, startY + (endY - startY) * progress);
+      autoScrollRaf = progress < 1 ? requestAnimationFrame(step) : null;
+    }
+    autoScrollRaf = requestAnimationFrame(step);
+    // a genuine scroll/tap/key from the visitor should hand control back to them
+    window.addEventListener("wheel", cancelAutoScrollOnInput, { passive: true, once: true });
+    window.addEventListener("touchstart", cancelAutoScrollOnInput, { passive: true, once: true });
+    window.addEventListener("keydown", cancelAutoScrollOnInput, { once: true });
+  }
+
+  function playAlbumTrack() {
+    if (!nowPlaying) return;
+    activeTrackKey = "nowplaying.letmegoLabel";
+    updateNowPlayingLabel();
+    if (!nowPlayingMuted) {
+      nowPlayingLoaded = true;
+      if (nowPlayingFrame) nowPlayingFrame.src = PLAY_ALBUM_TRACK_SRC;
+      nowPlaying.classList.remove("collapsed");
+      if (nowPlayingToggle) nowPlayingToggle.setAttribute("aria-expanded", "true");
+      nowPlaying.classList.add("pulse");
+      setTimeout(() => nowPlaying.classList.remove("pulse"), 2400);
+    }
+    startAutoScroll(PLAY_ALBUM_DURATION_MS);
   }
 
   /* -------------------- GALAXY DEPTH: scroll parallax -------------------- */
@@ -565,13 +940,9 @@
     }, { passive: true });
   }
 
-  /* -------------------- misc -------------------- */
-  document.getElementById("year").textContent = new Date().getFullYear();
-
   /* -------------------- init -------------------- */
-  renderTracklist();
-  renderSkills();
-  renderTour();
   renderOrbitFields();
   initAlbumGate();
+  const savedLang = localStorage.getItem(LANG_KEY);
+  applyLanguage(savedLang === "vi" ? "vi" : "en");
 })();

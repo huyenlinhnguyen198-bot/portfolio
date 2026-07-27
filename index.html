@@ -41,7 +41,7 @@
 
 <!-- ============ ALBUM GATE: intro tracklist before the portfolio ============ -->
 <div class="album-gate" id="albumGate">
-  <a class="gate-skip" id="gateSkip" href="#main">Skip intro →</a>
+  <a class="gate-skip" id="gateSkip" href="#main" data-i18n="gate.skip">Skip intro →</a>
 
   <div class="gate-bg" aria-hidden="true"></div>
   <div class="gate-scrim" aria-hidden="true"></div>
@@ -56,19 +56,19 @@
         <circle cx="50" cy="50" r="4" fill="#15130F"/>
       </svg>
       <div class="gate-heading">
-        <p class="eyebrow">Soundtrack for this portfolio</p>
+        <p class="eyebrow" data-i18n="gate.eyebrow">Soundtrack for this portfolio</p>
         <p class="gate-title">Xoay Tròn</p>
       </div>
     </div>
 
-    <p class="gate-welcome">Welcome to Huyen Linh's World</p>
+    <p class="gate-welcome" data-i18n="gate.welcome">Welcome to Huyen Linh's World</p>
 
     <div class="gate-spotify">
       <iframe title="La Bàn — Hoàng Dũng, Pixel Neko (Spotify)" style="border-radius:14px" src="https://open.spotify.com/embed/track/5G8D7sPL8mUhrNOm5jC3Sm?utm_source=generator&theme=0" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <button class="btn btn-primary gate-cta" id="startListenBtn" type="button">
-      Enter the Portfolio
+      <span data-i18n="gate.cta">Enter the Portfolio</span>
       <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
@@ -92,19 +92,22 @@
   </a>
 
   <nav class="nav-links" id="navLinks" aria-label="Section navigation">
-    <a href="#overture" data-sfx="click">Overture</a>
-    <a href="#tracklist" data-sfx="click">Tracklist</a>
-    <a href="#backstage" data-sfx="click">Backstage</a>
-    <a href="#tour" data-sfx="click">Tour Dates</a>
-    <a href="#encore" data-sfx="click">Encore</a>
+    <a href="#overture" data-sfx="click" data-i18n="nav.overture">Overture</a>
+    <a href="#tracklist" data-sfx="click" data-i18n="nav.tracklist">Tracklist</a>
+    <a href="#backstage" data-sfx="click" data-i18n="nav.backstage">Backstage</a>
+    <a href="#tour" data-sfx="click" data-i18n="nav.tour">Tour Dates</a>
+    <a href="#encore" data-sfx="click" data-i18n="nav.encore">Encore</a>
   </nav>
 
   <div class="nav-actions">
-    <button class="icon-btn lights-btn" id="lightsToggle" type="button" aria-pressed="false" aria-label="Toggle stage lights and play music">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a6 6 0 00-3.6 10.8c.5.4.6.9.6 1.5V16h6v-1.7c0-.6.1-1.1.6-1.5A6 6 0 0012 2z" fill="currentColor"/><rect x="10" y="18" width="4" height="2" rx="1" fill="currentColor"/><rect x="10.5" y="21" width="3" height="1.4" rx="0.7" fill="currentColor"/></svg>
-      <span class="lights-label">Lights On</span>
+    <button class="icon-btn" id="backToGateBtn" type="button" data-i18n-aria="nav.backAria" aria-label="Back to the La Bàn intro">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 5v14M18 6L8 12l10 6V6z" fill="currentColor"/></svg>
     </button>
-    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <button class="icon-btn lang-btn" id="langToggle" type="button" aria-pressed="false" aria-label="Switch site language">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9s1.3-6.5 3.8-9z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span class="lang-code" id="langCode">EN</span>
+    </button>
+    <button class="hamburger" id="hamburger" type="button" data-i18n-aria="nav.menuAria" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -145,7 +148,7 @@
     <div class="orbit-field" id="orbitHero" aria-hidden="true"></div>
 
     <div class="overture-inner">
-      <p class="eyebrow">Now Staging</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Now Staging</p>
       <div class="turntable" id="turntable">
         <div class="tt-plinth">
           <div class="tt-vinyl" id="ttVinyl">
@@ -159,20 +162,20 @@
       </div>
 
       <h1 class="overture-title">Nguyen Huyen Linh</h1>
-      <p class="overture-role">Business&nbsp;Analyst <span class="dot">·</span> Ha&nbsp;Noi, Vietnam</p>
-      <p class="overture-tagline">A 3rd-year International Economics student at Foreign Trade University, composing seamlessly functional software as a Business Analyst. Acting as a "Product Director" bridging business needs and tech solutions — BPMN, BRD/SRS documentation, API testing. Seeking a BA Intern/Fresher role to help orchestrate high-impact digital products.</p>
+      <p class="overture-role" data-i18n-html="hero.role">Business&nbsp;Analyst <span class="dot">·</span> Ha&nbsp;Noi, Vietnam</p>
+      <p class="overture-tagline" data-i18n="hero.tagline">A 3rd-year International Economics student at Foreign Trade University, composing seamlessly functional software as a Business Analyst. Acting as a "Product Director" bridging business needs and tech solutions — BPMN, BRD/SRS documentation, API testing. Seeking a BA Intern/Fresher role to help orchestrate high-impact digital products.</p>
 
       <div class="overture-cta">
         <button class="btn btn-primary" id="playIntroBtn" type="button" data-sfx="none">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-          <span id="playIntroLabel">Play Album</span>
+          <span id="playIntroLabel" data-i18n="hero.playAlbum">Play Album</span>
         </button>
-        <a class="btn btn-ghost" href="#tracklist" data-sfx="click">View Tracklist</a>
+        <a class="btn btn-ghost" href="#tracklist" data-sfx="click" data-i18n="hero.viewTracklist">View Tracklist</a>
       </div>
 
-      <p class="overture-meta">Side&nbsp;A · Side&nbsp;B — 6 tracks · Est. 2023 · Foreign Trade University</p>
+      <p class="overture-meta" data-i18n-html="hero.meta">Side&nbsp;A · Side&nbsp;B — 6 tracks · Est. 2023 · Foreign Trade University</p>
 
-      <a href="#tracklist" class="scroll-cue" aria-label="Scroll to tracklist" data-sfx="click">
+      <a href="#tracklist" class="scroll-cue" data-i18n-aria="hero.scrollAria" aria-label="Scroll to tracklist" data-sfx="click">
         <span></span>
       </a>
     </div>
@@ -182,9 +185,9 @@
   <section class="tracklist" id="tracklist">
     <div class="orbit-field" id="orbitTracklist" aria-hidden="true"></div>
     <div class="section-head reveal">
-      <p class="eyebrow">Track 02</p>
-      <h2>The Tracklist</h2>
-      <p class="section-sub">Case work and real-world cuts, played track by track. Tap any track to open the liner notes.</p>
+      <p class="eyebrow" data-i18n="tracklist.eyebrow">Track 02</p>
+      <h2 data-i18n="tracklist.h2">The Tracklist</h2>
+      <p class="section-sub" data-i18n="tracklist.sub">Case work and real-world cuts, played track by track. Tap any track to open the liner notes.</p>
     </div>
 
     <div class="tracklist-grid">
@@ -195,16 +198,16 @@
             <span id="stageVinylTrack">01</span>
           </div>
         </div>
-        <p class="stage-caption" id="stageCaption">Hover or tap a track</p>
+        <p class="stage-caption" id="stageCaption" data-i18n="tracklist.stageDefault">Hover or tap a track</p>
       </div>
 
       <div class="tracklist-sides">
         <div class="side reveal" data-side="A">
-          <h3 class="side-title">Side A <span>— Case Work</span></h3>
+          <h3 class="side-title" data-i18n-html="tracklist.sideA">Side A <span>— Case Work</span></h3>
           <ol class="track-list" id="sideA"></ol>
         </div>
         <div class="side reveal" data-side="B">
-          <h3 class="side-title">Side B <span>— Real-World Cuts</span></h3>
+          <h3 class="side-title" data-i18n-html="tracklist.sideB">Side B <span>— Real-World Cuts</span></h3>
           <ol class="track-list" id="sideB"></ol>
         </div>
       </div>
@@ -215,9 +218,9 @@
   <section class="backstage" id="backstage">
     <div class="orbit-field" id="orbitBackstage" aria-hidden="true"></div>
     <div class="section-head reveal">
-      <p class="eyebrow">Track 03</p>
-      <h2>Backstage Pass</h2>
-      <p class="section-sub">All-access details on the person behind the specs.</p>
+      <p class="eyebrow" data-i18n="backstage.eyebrow">Track 03</p>
+      <h2 data-i18n="backstage.h2">Backstage Pass</h2>
+      <p class="section-sub" data-i18n="backstage.sub">All-access details on the person behind the specs.</p>
     </div>
 
     <div class="pass-wrap reveal">
@@ -229,35 +232,35 @@
         </div>
         <div class="pass-photo" aria-hidden="true"></div>
         <h3 class="pass-name">Nguyen Huyen Linh</h3>
-        <p class="pass-role">Genre: Business Analysis</p>
+        <p class="pass-role" data-i18n="backstage.genre">Genre: Business Analysis</p>
 
         <dl class="pass-facts">
-          <div><dt>Status</dt><dd>BA Intern / Fresher</dd></div>
-          <div><dt>Next residency</dt><dd>Senior BA (3–4 yr tour)</dd></div>
-          <div><dt>Home venue</dt><dd>Ha Noi, Vietnam</dd></div>
-          <div><dt>Label</dt><dd>Foreign Trade University</dd></div>
+          <div><dt data-i18n="backstage.factStatus">Status</dt><dd data-i18n="backstage.factStatusValue">BA Intern / Fresher</dd></div>
+          <div><dt data-i18n="backstage.factResidency">Next residency</dt><dd data-i18n="backstage.factResidencyValue">Senior BA (3–4 yr tour)</dd></div>
+          <div><dt data-i18n="backstage.factVenue">Home venue</dt><dd data-i18n="backstage.factVenueValue">Ha Noi, Vietnam</dd></div>
+          <div><dt data-i18n="backstage.factLabel">Label</dt><dd data-i18n="backstage.factLabelValue">Foreign Trade University</dd></div>
         </dl>
 
-        <p class="pass-bio">3rd-year International Economics student at Foreign Trade University (GPA 3.27/4.0, IELTS 6.5), acting as a "Product Director" bridging business needs and tech solutions. Trained hands-on in BPMN, BRD/FRD/SRS, user flows, and API testing — booking her first full-time gig as a BA Intern/Fresher.</p>
+        <p class="pass-bio" data-i18n="backstage.bio">3rd-year International Economics student at Foreign Trade University (GPA 3.27/4.0, IELTS 6.5), acting as a "Product Director" bridging business needs and tech solutions. Trained hands-on in BPMN, BRD/FRD/SRS, user flows, and API testing — booking her first full-time gig as a BA Intern/Fresher.</p>
 
         <div class="pass-qr">
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=https://www.linkedin.com/in/linhnguyen198&color=15130F&bgcolor=F4F1E9" alt="QR code linking to Nguyen Huyen Linh's LinkedIn profile" width="90" height="90" loading="lazy">
-          <span class="pass-qr-label">Scan for<br>LinkedIn</span>
+          <span class="pass-qr-label" data-i18n-html="backstage.qr">Scan for<br>LinkedIn</span>
         </div>
         <div class="pass-teeth" aria-hidden="true"></div>
       </div>
 
       <div class="lineup">
         <div class="lineup-block">
-          <h4>Line-up <span>— Business Analysis</span></h4>
+          <h4 data-i18n-html="backstage.lineupBA">Line-up <span>— Business Analysis</span></h4>
           <ul class="tag-list" id="skillsBA"></ul>
         </div>
         <div class="lineup-block">
-          <h4>Equipment <span>— Tools &amp; Data</span></h4>
+          <h4 data-i18n-html="backstage.lineupTools">Equipment <span>— Tools &amp; Data</span></h4>
           <ul class="tag-list" id="skillsTools"></ul>
         </div>
         <div class="lineup-block">
-          <h4>Crew <span>— Interpersonal</span></h4>
+          <h4 data-i18n-html="backstage.lineupSoft">Crew <span>— Interpersonal</span></h4>
           <ul class="tag-list" id="skillsSoft"></ul>
         </div>
       </div>
@@ -268,9 +271,9 @@
   <section class="tour" id="tour">
     <div class="orbit-field" id="orbitTour" aria-hidden="true"></div>
     <div class="section-head reveal">
-      <p class="eyebrow">Track 04</p>
-      <h2>World Tour Dates</h2>
-      <p class="section-sub">Education, training and work — mapped like a tour poster.</p>
+      <p class="eyebrow" data-i18n="tour.eyebrow">Track 04</p>
+      <h2 data-i18n="tour.h2">World Tour Dates</h2>
+      <p class="section-sub" data-i18n="tour.sub">Education, training and work — mapped like a tour poster.</p>
     </div>
 
     <ol class="tour-list reveal" id="tourList"></ol>
@@ -280,42 +283,42 @@
   <section class="encore" id="encore">
     <div class="orbit-field" id="orbitEncore" aria-hidden="true"></div>
     <div class="encore-inner reveal">
-      <p class="eyebrow">Final Track</p>
-      <h2 class="neon">Want an Encore?</h2>
-      <p class="section-sub">Let's put your project on the set list.</p>
+      <p class="eyebrow" data-i18n="encore.eyebrow">Final Track</p>
+      <h2 class="neon" data-i18n="encore.h2">Want an Encore?</h2>
+      <p class="section-sub" data-i18n="encore.sub">Let's put your project on the set list.</p>
 
       <div class="encore-grid">
         <form class="request-sheet" id="requestForm">
-          <p class="sheet-title">Song Request Sheet</p>
-          <label for="reqName">Your name</label>
+          <p class="sheet-title" data-i18n="encore.sheetTitle">Song Request Sheet</p>
+          <label for="reqName" data-i18n="encore.labelName">Your name</label>
           <input id="reqName" name="reqName" type="text" autocomplete="name" required>
 
-          <label for="reqEmail">Your email</label>
+          <label for="reqEmail" data-i18n="encore.labelEmail">Your email</label>
           <input id="reqEmail" name="reqEmail" type="email" autocomplete="email" required>
 
-          <label for="reqMsg">Request (what do you need help with?)</label>
+          <label for="reqMsg" data-i18n="encore.labelMsg">Request (what do you need help with?)</label>
           <textarea id="reqMsg" name="reqMsg" rows="4" required></textarea>
 
-          <button class="btn btn-primary" type="submit" data-sfx="click">Send Request</button>
-          <p class="sheet-note">Opens your email app — nothing is stored or sent anywhere else.</p>
+          <button class="btn btn-primary" type="submit" data-sfx="click" data-i18n="encore.send">Send Request</button>
+          <p class="sheet-note" data-i18n="encore.note">Opens your email app — nothing is stored or sent anywhere else.</p>
         </form>
 
         <div class="ticket-stubs">
           <a class="stub" href="mailto:huyenlinhnguyen198@gmail.com" data-sfx="click">
-            <span class="stub-label">Email</span>
+            <span class="stub-label" data-i18n="encore.stubEmail">Email</span>
             <span class="stub-value">huyenlinhnguyen198@gmail.com</span>
           </a>
           <a class="stub" href="tel:+84962338081" data-sfx="click">
-            <span class="stub-label">Phone</span>
+            <span class="stub-label" data-i18n="encore.stubPhone">Phone</span>
             <span class="stub-value">(+84) 96 233 8081</span>
           </a>
           <a class="stub" href="https://www.linkedin.com/in/linhnguyen198" target="_blank" rel="noopener" data-sfx="click">
-            <span class="stub-label">LinkedIn</span>
+            <span class="stub-label" data-i18n="encore.stubLinkedin">LinkedIn</span>
             <span class="stub-value">linkedin.com/in/linhnguyen198</span>
           </a>
           <a class="stub" href="#overture" data-sfx="click">
-            <span class="stub-label">Venue</span>
-            <span class="stub-value">Ha Noi, Vietnam</span>
+            <span class="stub-label" data-i18n="encore.stubVenue">Venue</span>
+            <span class="stub-value" data-i18n="encore.venueValue">Ha Noi, Vietnam</span>
           </a>
         </div>
       </div>
@@ -325,19 +328,19 @@
 </main>
 
 <footer class="site-footer">
-  <p>🎙 Thanks for coming to the show. No refunds, only feedback.</p>
-  <p class="fine-print">Designed &amp; coded independently — powered by vinyl and coffee. © <span id="year"></span> Nguyen Huyen Linh.</p>
+  <p data-i18n="footer.thanks">🎙 Thanks for coming to the show. No refunds, only feedback.</p>
+  <p class="fine-print">Designed &amp; coded independently — powered by vinyl and coffee. © 2026 Nguyen Huyen Linh.</p>
 </footer>
 
 <!-- ============ TRACK MODAL (Lyric Booklet) ============ -->
 <div class="modal-backdrop" id="modalBackdrop" hidden>
   <div class="modal-booklet" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalBooklet">
-    <button class="modal-close" id="modalClose" type="button" aria-label="Close booklet">×</button>
+    <button class="modal-close" id="modalClose" type="button" data-i18n-aria="modal.close" aria-label="Close booklet">×</button>
     <p class="modal-track-no" id="modalTrackNo">01</p>
     <h3 class="modal-title" id="modalTitle"></h3>
     <p class="modal-subtitle" id="modalSubtitle"></p>
     <ul class="modal-tags" id="modalTags"></ul>
-    <p class="modal-liner-label">Liner Notes</p>
+    <p class="modal-liner-label" data-i18n="modal.liner">Liner Notes</p>
     <ul class="modal-details" id="modalDetails"></ul>
     <p class="modal-date" id="modalDate"></p>
   </div>
