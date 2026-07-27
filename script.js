@@ -505,8 +505,9 @@
       setTimeout(() => { gate.hidden = true; }, 500);
       if (startAudio) {
         // load + attempt autoplay right on this click — the strongest signal
-        // a browser will accept for "the user asked for sound"
-        revealNowPlaying(true);
+        // a browser will accept for "the user asked for sound". Entering the
+        // portfolio now starts "Let Me Go" straight away.
+        revealLetMeGo(true);
       }
     }
 
@@ -819,15 +820,21 @@
     if (label) label.textContent = t(activeTrackKey);
   }
 
+  /* which Spotify src belongs to the currently-active track, so a resume
+     (e.g. after unmuting) always continues the right song */
+  function trackSrcForActiveKey() {
+    return activeTrackKey === "nowplaying.letmegoLabel" ? PLAY_ALBUM_TRACK_SRC : SPOTIFY_TRACK_SRC;
+  }
+
   function loadNowPlaying() {
     if (nowPlayingLoaded || !nowPlayingFrame) return;
     nowPlayingLoaded = true;
-    nowPlayingFrame.src = SPOTIFY_TRACK_SRC;
+    nowPlayingFrame.src = trackSrcForActiveKey();
   }
 
-  /* every default "play" trigger in the site (Lights-era toggle, the album
-     gate) funnels through here — if the user has muted via the single
-     speaker icon on the widget, respect that and stay silent */
+  /* every default "play" trigger in the site funnels through here — if the
+     user has muted via the single speaker icon on the widget, respect that
+     and stay silent */
   function revealNowPlaying(pulse) {
     if (!nowPlaying || nowPlayingMuted) return;
     loadNowPlaying();
@@ -837,6 +844,15 @@
       nowPlaying.classList.add("pulse");
       setTimeout(() => nowPlaying.classList.remove("pulse"), 2400);
     }
+  }
+
+  /* switch the widget to "Let Me Go" (KIMLONG) and play it — used by both
+     the gate's "Enter the Portfolio" button and the hero's "Play Album" */
+  function revealLetMeGo(pulse) {
+    activeTrackKey = "nowplaying.letmegoLabel";
+    updateNowPlayingLabel();
+    nowPlayingLoaded = false; // force the iframe to switch src even if something else was already loaded
+    revealNowPlaying(pulse);
   }
 
   if (nowPlaying && nowPlayingToggle) {
@@ -909,17 +925,7 @@
   }
 
   function playAlbumTrack() {
-    if (!nowPlaying) return;
-    activeTrackKey = "nowplaying.letmegoLabel";
-    updateNowPlayingLabel();
-    if (!nowPlayingMuted) {
-      nowPlayingLoaded = true;
-      if (nowPlayingFrame) nowPlayingFrame.src = PLAY_ALBUM_TRACK_SRC;
-      nowPlaying.classList.remove("collapsed");
-      if (nowPlayingToggle) nowPlayingToggle.setAttribute("aria-expanded", "true");
-      nowPlaying.classList.add("pulse");
-      setTimeout(() => nowPlaying.classList.remove("pulse"), 2400);
-    }
+    revealLetMeGo(true);
     startAutoScroll(PLAY_ALBUM_DURATION_MS);
   }
 
